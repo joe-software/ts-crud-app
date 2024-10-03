@@ -10,6 +10,10 @@ const app = express();
 const port = process.env.PORT;
 const uri = process.env.DBSTRING
 
+// configure template engine
+app.set('views', './src/views')
+app.set('view engine', 'ejs')
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
     serverApi: {
@@ -33,7 +37,8 @@ const client = new MongoClient(uri, {
   run().catch(console.dir);
 
 app.get('/', (req, res) => {
-  res.send('testing');
+//   res.send('testing');
+    res.render('index')
 });
 
 app.listen(port, () => {

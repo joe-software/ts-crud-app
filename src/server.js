@@ -43,6 +43,9 @@ dotenv.config();
 var app = express();
 var port = process.env.PORT;
 var uri = process.env.DBSTRING;
+// configure template engine
+app.set('views', './src/views');
+app.set('view engine', 'ejs');
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 var client = new MongoClient(uri, {
     serverApi: {
@@ -83,7 +86,8 @@ function run() {
 }
 run().catch(console.dir);
 app.get('/', function (req, res) {
-    res.send('testing');
+    //   res.send('testing');
+    res.render('index');
 });
 app.listen(port, function () {
     console.log("[server]: Server is running at http://localhost:".concat(port));
