@@ -44,6 +44,7 @@ var app = express();
 var port = process.env.PORT;
 var uri = process.env.DBSTRING;
 // configure template engine
+app.use('/', express.static(__dirname + 'public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -87,6 +88,11 @@ function run() {
 run().catch(console.dir);
 app.get('/', function (req, res) {
     //   res.send('testing');
+    // console.log(req.body)
+    res.render('index');
+});
+app.post('/submit-car-info', function (req, res) {
+    console.log(req);
     res.render('index');
 });
 app.listen(port, function () {

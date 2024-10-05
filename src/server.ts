@@ -11,6 +11,7 @@ const port = process.env.PORT;
 const uri = process.env.DBSTRING
 
 // configure template engine
+app.use('/', express.static(__dirname + 'public'));
 app.set('views', './src/views')
 app.set('view engine', 'ejs')
 
@@ -38,8 +39,16 @@ const client = new MongoClient(uri, {
 
 app.get('/', (req, res) => {
 //   res.send('testing');
+    // console.log(req.body)
     res.render('index')
 });
+
+app.post('/submit-car-info', (req, res) => {
+        console.log(req)
+        res.render('index')
+    });
+
+
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
