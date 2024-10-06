@@ -14,6 +14,7 @@ const dotenv = require('dotenv');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 // configure dotenv files
 dotenv.config();
+// ** if type is declared for process.env variables it throws an error because it could also be undefined - this can be corrected using assertation functions  ** -- TODO
 const app = express();
 const port = process.env.PORT;
 const uri = process.env.DBSTRING;
@@ -50,9 +51,17 @@ function run() {
 }
 run().catch(console.dir);
 // respond with index page
-app.get('/', (req, res) => {
-    res.render('index');
-});
+app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let dataArr = [];
+    yield client.connect();
+    const myDB = client.db('ts-crud-app');
+    const dbCollection = myDB.collection('car-data-collection');
+    yield dbCollection.find().forEach((item) => dataArr.push(item));
+    yield client.close();
+    res.render('index', {
+        carData: dataArr
+    });
+}));
 app.post('/car-data-post', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield client.connect();
     const myDB = client.db('ts-crud-app');

@@ -1,6 +1,7 @@
 "use strict";
 // send POST request server with car data
 let submitCarData = document.getElementById("submit-car-data");
+// - TS required a function to handle the occasion which submitCarData is null
 if (submitCarData == null) {
     console.log('error - formtest variable not found');
 }

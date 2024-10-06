@@ -4,6 +4,11 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Index</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+
+</head>
+<body>
     <h1>Tell us about your favourite car!!!</h1>
     <form id="car-form-data" method="POST" action="">
         <label for="car-brand-input">Brand</label>
@@ -16,12 +21,18 @@
         <input id="car-colour-input" name="car-colour-input" type="color">
     </form>
     <button id="submit-car-data">Submit</button>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
-    <script type="text/javascript"  src="main.js"></script>
 
-</head>
-<body>
-    <p>Test</p>
+     <% carData.forEach(item =>{ %>
+        <p>Car Brand:   <%= item.brand %></p>
+        <p>Car Model:   <%= item.model %></p>
+        <p>Date of Model:   <%= item.date %></p>
+        <p>Colour of Car:   <%= item.Colour %></p>
+        <div id="colour-patch" style="background-color:<%= item.colour %>" id="colour-patch"></div>
+     <%})%>
+        <p><%= carData.brand %></p>
+    
+
+
 </body>
+<script type="text/javascript"  src="main.js"></script>
 </html>
