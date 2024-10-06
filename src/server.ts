@@ -48,9 +48,13 @@ app.get('/', (req: any, res: any) => {
     res.render('index')
 });
 
-app.post('/car-data-post', (req: any, res: any) => {
-        console.log(req.body)
-        
+app.post('/car-data-post', async (req: any, res: any) => {
+
+        await client.connect();
+        const myDB = client.db('ts-crud-app')
+        const dbCollection = myDB.collection('car-data-collection')
+        await dbCollection.insertOne(req.body)
+        await client.close();        
     });
 
 

@@ -53,9 +53,13 @@ run().catch(console.dir);
 app.get('/', (req, res) => {
     res.render('index');
 });
-app.post('/car-data-post', (req, res) => {
-    console.log(req.body);
-});
+app.post('/car-data-post', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield client.connect();
+    const myDB = client.db('ts-crud-app');
+    const dbCollection = myDB.collection('car-data-collection');
+    yield dbCollection.insertOne(req.body);
+    yield client.close();
+}));
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });
