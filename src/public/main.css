@@ -4,3 +4,15 @@
     border: 5px solid black;
     border-radius: 10px;
 }
+
+.card-cont{
+    display: flex;
+}
+
+.car-data-card-cont{
+    border: 5px solid black;
+    border-radius: 10px;
+    margin: 10px 5px;
+    padding: 10px 5px;
+    width: 30%;
+}

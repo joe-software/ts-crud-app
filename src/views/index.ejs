@@ -21,15 +21,18 @@
         <input id="car-colour-input" name="car-colour-input" type="color">
     </form>
     <button id="submit-car-data">Submit</button>
-
+    <div class="card-cont">
      <% carData.forEach(item =>{ %>
+        <div class="car-data-card-cont">
         <p>Car Brand:   <%= item.brand %></p>
         <p>Car Model:   <%= item.model %></p>
         <p>Date of Model:   <%= item.date %></p>
         <p>Colour of Car:   <%= item.Colour %></p>
         <div id="colour-patch" style="background-color:<%= item.colour %>" id="colour-patch"></div>
+        <button id="delete-post">Delete Post</button>
+        </div>
      <%})%>
-        <p><%= carData.brand %></p>
+    </div>
     
 
 
