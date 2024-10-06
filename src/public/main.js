@@ -1,12 +1,13 @@
 "use strict";
+// send POST request server with car data
 let submitCarData = document.getElementById("submit-car-data");
 if (submitCarData == null) {
     console.log('error - formtest variable not found');
 }
 else {
+    let data = document.getElementById("car-form-data");
+    let dataSubmissionObject;
     submitCarData.addEventListener('click', function () {
-        let data = document.getElementById("car-form-data");
-        let dataSubmissionObject;
         if (data == null) {
             console.log("No data found");
         }
@@ -17,7 +18,15 @@ else {
                 'date': new Date(data[2].value),
                 'colour': data[3].value
             };
-            console.log(dataSubmissionObject);
         }
+        // fetch request
+        fetch("car-data-post", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(dataSubmissionObject)
+        });
     });
 }

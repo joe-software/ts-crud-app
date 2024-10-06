@@ -11,6 +11,9 @@ const port = process.env.PORT;
 const uri = process.env.DBSTRING
 const path = require('path');
 
+// enable application/JSON data handling from client requests
+app.use(express.json())
+
 // configure template engine
 app.set('views', './src/views')
 app.set('view engine', 'ejs')
@@ -39,17 +42,17 @@ const client = new MongoClient(uri, {
     }
   }
   run().catch(console.dir);
-  
+
+// respond with index page
 app.get('/', (req: any, res: any) => {
-//   res.send('testing');
-    // console.log(req.body)
     res.render('index')
 });
 
-app.post('/submit-car-info', (req: any, res: any) => {
-        console.log(req)
-        res.render('index')
+app.post('/car-data-post', (req: any, res: any) => {
+        console.log(req.body)
+        
     });
+
 
 
 

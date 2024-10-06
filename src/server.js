@@ -18,6 +18,8 @@ const app = express();
 const port = process.env.PORT;
 const uri = process.env.DBSTRING;
 const path = require('path');
+// enable application/JSON data handling from client requests
+app.use(express.json());
 // configure template engine
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -47,14 +49,12 @@ function run() {
     });
 }
 run().catch(console.dir);
+// respond with index page
 app.get('/', (req, res) => {
-    //   res.send('testing');
-    // console.log(req.body)
     res.render('index');
 });
-app.post('/submit-car-info', (req, res) => {
-    console.log(req);
-    res.render('index');
+app.post('/car-data-post', (req, res) => {
+    console.log(req.body);
 });
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);

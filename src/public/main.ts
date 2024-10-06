@@ -1,4 +1,3 @@
-let submitCarData = document.getElementById("submit-car-data")
 interface CarDataInterface  {
     brand: string, 
     model: string,
@@ -6,12 +5,14 @@ interface CarDataInterface  {
     colour: string
 }
 
+// send POST request server with car data
+let submitCarData = document.getElementById("submit-car-data")
 if(submitCarData == null){
     console.log('error - formtest variable not found')
 } else {
-    submitCarData.addEventListener('click', function(){
-        let data: any = document.getElementById("car-form-data")
+    let data: any = document.getElementById("car-form-data")
         let dataSubmissionObject: CarDataInterface
+    submitCarData.addEventListener('click', function(){
         if( data == null){
             console.log("No data found")
         } else {
@@ -21,9 +22,17 @@ if(submitCarData == null){
                 'date': new Date(data[2].value), 
                 'colour': data[3].value
             }
-             
-             console.log(dataSubmissionObject)
         }
+        // fetch request
+    fetch("car-data-post", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        method: 'POST',
+        body: JSON.stringify(dataSubmissionObject)
+    })
+        
     })
 }
     
