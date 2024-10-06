@@ -9,11 +9,14 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 const uri = process.env.DBSTRING
+const path = require('path');
 
 // configure template engine
-app.use('/', express.static(__dirname + 'public'));
 app.set('views', './src/views')
 app.set('view engine', 'ejs')
+
+// static file config
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -36,14 +39,14 @@ const client = new MongoClient(uri, {
     }
   }
   run().catch(console.dir);
-
-app.get('/', (req, res) => {
+  
+app.get('/', (req: any, res: any) => {
 //   res.send('testing');
     // console.log(req.body)
     res.render('index')
 });
 
-app.post('/submit-car-info', (req, res) => {
+app.post('/submit-car-info', (req: any, res: any) => {
         console.log(req)
         res.render('index')
     });
