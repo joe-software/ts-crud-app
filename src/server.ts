@@ -68,6 +68,15 @@ app.post('/car-data-post', async (req: any, res: any) => {
     });
 
 
+    app.delete('/delete-post', async (req: any, res: any) => {
+      await client.connect();
+      const myDB = client.db('ts-crud-app')
+      const dbCollection = myDB.collection('car-data-collection')
+      await dbCollection.find().forEach((item: {}) => console.log(item));
+      // await dbCollection.deleteOne({_id: `new ObjectId(${req.body.mongoid})`})
+      await client.close();        
+    });
+
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

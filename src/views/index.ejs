@@ -27,9 +27,8 @@
         <p>Car Brand:   <%= item.brand %></p>
         <p>Car Model:   <%= item.model %></p>
         <p>Date of Model:   <%= item.date %></p>
-        <p>Colour of Car:   <%= item.Colour %></p>
         <div id="colour-patch" style="background-color:<%= item.colour %>" id="colour-patch"></div>
-        <button id="delete-post">Delete Post</button>
+        <button data-mongoid="<%= item._id %>"" id="delete-post">Delete Post</button>
         </div>
      <%})%>
     </div>

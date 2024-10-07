@@ -69,6 +69,14 @@ app.post('/car-data-post', (req, res) => __awaiter(void 0, void 0, void 0, funct
     yield dbCollection.insertOne(req.body);
     yield client.close();
 }));
+app.delete('/delete-post', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield client.connect();
+    const myDB = client.db('ts-crud-app');
+    const dbCollection = myDB.collection('car-data-collection');
+    yield dbCollection.find().forEach((item) => console.log(item));
+    // await dbCollection.deleteOne({_id: `new ObjectId(${req.body.mongoid})`})
+    yield client.close();
+}));
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });

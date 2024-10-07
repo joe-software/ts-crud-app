@@ -3,7 +3,7 @@
 let submitCarData = document.getElementById("submit-car-data");
 // - TS required a function to handle the occasion which submitCarData is null
 if (submitCarData == null) {
-    console.log('error - formtest variable not found');
+    console.log('error - form element not found');
 }
 else {
     let data = document.getElementById("car-form-data");
@@ -29,5 +29,24 @@ else {
             method: 'POST',
             body: JSON.stringify(dataSubmissionObject)
         });
+    });
+}
+// send delete request - to delete a post
+let deletePost = document.getElementById("delete-post");
+// - TS required a function to handle the occasion which deletePost is null
+if (deletePost == null) {
+    console.log('error - delete post element not found');
+}
+else {
+    let deletePostData = {
+        'mongoid': deletePost.dataset.mongoid
+    };
+    fetch("delete-post", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'DELETE',
+        body: JSON.stringify(deletePostData)
     });
 }
