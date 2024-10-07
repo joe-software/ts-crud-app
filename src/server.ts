@@ -74,9 +74,7 @@ app.post('/car-data-post', async (req: any, res: any) => {
       console.log('delete called')
       await client.connect();
       const myDB = client.db('ts-crud-app')
-      const dbCollection = myDB.collection('car-data-collection')
-      // await dbCollection.find().forEach((item: {}) => console.log(item));
-      
+      const dbCollection = myDB.collection('car-data-collection')      
       await dbCollection.deleteOne({_id: new ObjectId(req.body.mongoid)})
       await client.close(); 
     });

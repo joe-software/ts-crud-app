@@ -77,7 +77,6 @@ app.delete('/delete-post', (req, res) => __awaiter(void 0, void 0, void 0, funct
     yield client.connect();
     const myDB = client.db('ts-crud-app');
     const dbCollection = myDB.collection('car-data-collection');
-    // await dbCollection.find().forEach((item: {}) => console.log(item));
     yield dbCollection.deleteOne({ _id: new mongodb_1.ObjectId(req.body.mongoid) });
     yield client.close();
 }));
