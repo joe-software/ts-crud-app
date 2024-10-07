@@ -8,10 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 // Import required packages
 const express = require('express');
 const dotenv = require('dotenv');
 const { MongoClient, ServerApiVersion } = require('mongodb');
+// ObjectId required when using the mondo id field in a collection
+const mongodb_1 = require("mongodb");
 // configure dotenv files
 dotenv.config();
 // ** if type is declared for process.env variables it throws an error because it could also be undefined - this can be corrected using assertation functions  ** -- TODO
@@ -70,11 +73,12 @@ app.post('/car-data-post', (req, res) => __awaiter(void 0, void 0, void 0, funct
     yield client.close();
 }));
 app.delete('/delete-post', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('delete called');
     yield client.connect();
     const myDB = client.db('ts-crud-app');
     const dbCollection = myDB.collection('car-data-collection');
-    yield dbCollection.find().forEach((item) => console.log(item));
-    // await dbCollection.deleteOne({_id: `new ObjectId(${req.body.mongoid})`})
+    // await dbCollection.find().forEach((item: {}) => console.log(item));
+    yield dbCollection.deleteOne({ _id: new mongodb_1.ObjectId(req.body.mongoid) });
     yield client.close();
 }));
 app.listen(port, () => {

@@ -32,21 +32,39 @@ else {
     });
 }
 // send delete request - to delete a post
-let deletePost = document.getElementById("delete-post");
+let deletePost = document.querySelectorAll(".delete-post");
 // - TS required a function to handle the occasion which deletePost is null
-if (deletePost == null) {
-    console.log('error - delete post element not found');
+if (deletePost[0] == null) {
+    console.log('error - delete post element not found possibly due to no data cards in DOM');
 }
 else {
-    let deletePostData = {
-        'mongoid': deletePost.dataset.mongoid
-    };
-    fetch("delete-post", {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: 'DELETE',
-        body: JSON.stringify(deletePostData)
+    deletePost.forEach((item) => {
+        item.addEventListener('click', () => {
+            let deletePostData = {
+                'mongoid': item.dataset.mongoid
+            };
+            fetch("delete-post", {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'DELETE',
+                body: JSON.stringify(deletePostData)
+            });
+        });
     });
 }
+//     addEventListener('click', () =>{
+//         let deletePostData: PostDeleteInterface = {
+//             'mongoid': deletePost.dataset.mongoid
+//         }
+//         fetch("delete-post", {
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//               },
+//             method: 'DELETE',
+//             body: JSON.stringify(deletePostData)
+//         })
+//     })
+// }

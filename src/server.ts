@@ -2,6 +2,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const { MongoClient, ServerApiVersion } = require('mongodb');
+// ObjectId required when using the mondo id field in a collection
+import { ObjectId } from "mongodb";
 
 // configure dotenv files
 dotenv.config();
@@ -64,17 +66,19 @@ app.post('/car-data-post', async (req: any, res: any) => {
         const myDB = client.db('ts-crud-app')
         const dbCollection = myDB.collection('car-data-collection')
         await dbCollection.insertOne(req.body)
-        await client.close();        
+        await client.close();       
     });
 
 
     app.delete('/delete-post', async (req: any, res: any) => {
+      console.log('delete called')
       await client.connect();
       const myDB = client.db('ts-crud-app')
       const dbCollection = myDB.collection('car-data-collection')
-      await dbCollection.find().forEach((item: {}) => console.log(item));
-      // await dbCollection.deleteOne({_id: `new ObjectId(${req.body.mongoid})`})
-      await client.close();        
+      // await dbCollection.find().forEach((item: {}) => console.log(item));
+      
+      await dbCollection.deleteOne({_id: new ObjectId(req.body.mongoid)})
+      await client.close(); 
     });
 
 
