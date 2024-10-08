@@ -67,21 +67,34 @@ if(deletePost[0] == null){
 
     )}
     
+interface UpdatePostInterface {
+    model: string
+    }
+    // send update request - to update a post
+let updatePost: any = document.querySelectorAll(".update-post")
+// - TS required a function to handle the occasion which deletePost is null
+if(updatePost[0] == null){
+    console.log('error - update post element not found possibly due to no data cards in DOM')
+} else {
+    updatePost.forEach((item: any, index: number) => {
+        item.addEventListener('click', () =>{
+            let model: any = document.getElementById(`car-model-update${[index]}`)
+            let updatePostData: UpdatePostInterface = {
+                'model': model
+            }
+        
+            fetch("delete-post", {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                method: 'DELETE',
+                body: JSON.stringify(deletePostData)
+            })
     
-//     addEventListener('click', () =>{
-//         let deletePostData: PostDeleteInterface = {
-//             'mongoid': deletePost.dataset.mongoid
-//         }
+        })
     
-//         fetch("delete-post", {
-//             headers: {
-//                 'Accept': 'application/json',
-//                 'Content-Type': 'application/json'
-//               },
-//             method: 'DELETE',
-//             body: JSON.stringify(deletePostData)
-//         })
+    }
 
-//     })
-
-// }
+    )}
+    
