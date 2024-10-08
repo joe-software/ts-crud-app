@@ -33,15 +33,15 @@
 
         <p>Car Model:   <%= item.model %></p>
         <label for="car-model-update">Update model</label>
-        <input id="car-model-update<%=index%" name="car-model-update" type="text" value="<%= item.model %>">
+        <input id="car-model-update<%=index%>" name="car-model-update" type="text" value="<%= item.model %>">
 
         <p>Date of Model:   <%= item.date %></p>
         <label for="car-date-update">Update date</label>
-        <input id="car-date-update<%=index%" name="car-date-update" type="date" value="<%= item.date %>">
+        <input id="car-date-update<%=index%>" name="car-date-update" type="date" value="<%= item.date %>">
 
         <div id="colour-patch" style="background-color:<%= item.colour %>" id="colour-patch"></div>
         <label for="car-colour-update">Update Colour</label>
-        <input id="car-colour-update" name="car-colour-update" type="color" value="<%= item.model %>">
+        <input id="car-colour-update<%=index%>" name="car-colour-update" type="color" value="<%= item.model %>">
             
         <button data-mongoid="<%= item._id %>" class="update-post">Update Post</button>
         <button data-mongoid="<%= item._id %>" class="delete-post">Delete Post</button>

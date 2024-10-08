@@ -54,17 +54,26 @@ else {
         });
     });
 }
-//     addEventListener('click', () =>{
-//         let deletePostData: PostDeleteInterface = {
-//             'mongoid': deletePost.dataset.mongoid
-//         }
-//         fetch("delete-post", {
-//             headers: {
-//                 'Accept': 'application/json',
-//                 'Content-Type': 'application/json'
-//               },
-//             method: 'DELETE',
-//             body: JSON.stringify(deletePostData)
-//         })
-//     })
-// }
+// send update request - to update a post
+let updatePost = document.querySelectorAll(".update-post");
+// - TS required a function to handle the occasion which deletePost is null
+if (updatePost[0] == null) {
+    console.log('error - update post element not found possibly due to no data cards in DOM');
+}
+else {
+    updatePost.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            let brand = document.getElementById(`car-brand-update${[index]}`);
+            let model = document.getElementById(`car-model-update${[index]}`);
+            let date = document.getElementById(`car-date-update${[index]}`);
+            let colour = document.getElementById(`car-colour-update${[index]}`);
+            let updatePostData = {
+                'brand': brand.value,
+                'model': model.value,
+                'date': date.value,
+                'colour': colour.value
+            };
+            console.log(updatePostData);
+        });
+    });
+}

@@ -2,7 +2,8 @@ interface CarDataInterface  {
     brand: string, 
     model: string,
     date: Date, 
-    colour: string
+    colour: string,
+    id?: string
 }
 
 // send POST request server with car data
@@ -67,9 +68,7 @@ if(deletePost[0] == null){
 
     )}
     
-interface UpdatePostInterface {
-    model: string
-    }
+
     // send update request - to update a post
 let updatePost: any = document.querySelectorAll(".update-post")
 // - TS required a function to handle the occasion which deletePost is null
@@ -78,19 +77,19 @@ if(updatePost[0] == null){
 } else {
     updatePost.forEach((item: any, index: number) => {
         item.addEventListener('click', () =>{
+            let brand: any = document.getElementById(`car-brand-update${[index]}`)
             let model: any = document.getElementById(`car-model-update${[index]}`)
-            let updatePostData: UpdatePostInterface = {
-                'model': model
+            let date: any = document.getElementById(`car-date-update${[index]}`)
+            let colour: any = document.getElementById(`car-colour-update${[index]}`)
+
+            
+            let updatePostData: CarDataInterface = {
+                'brand': brand.value,
+                'model': model.value,
+                'date': date.value,
+                'colour': colour.value
             }
-        
-            fetch("delete-post", {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  },
-                method: 'DELETE',
-                body: JSON.stringify(deletePostData)
-            })
+            console.log(updatePostData);
     
         })
     
