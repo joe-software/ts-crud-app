@@ -79,6 +79,10 @@ app.post('/car-data-post', async (req: any, res: any) => {
       await client.close(); 
     });
 
+    app.put('/update-post', async (req: any, res: any) => {
+       console.log(req.body)
+  });
+
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

@@ -80,6 +80,9 @@ app.delete('/delete-post', (req, res) => __awaiter(void 0, void 0, void 0, funct
     yield dbCollection.deleteOne({ _id: new mongodb_1.ObjectId(req.body.mongoid) });
     yield client.close();
 }));
+app.put('/update-post', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body);
+}));
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });

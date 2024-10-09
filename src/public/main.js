@@ -71,9 +71,17 @@ else {
                 'brand': brand.value,
                 'model': model.value,
                 'date': date.value,
-                'colour': colour.value
+                'colour': colour.value,
+                'id': item.dataset.mongoid
             };
-            console.log(updatePostData);
+            fetch("update-post", {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'PUT',
+                body: JSON.stringify(updatePostData)
+            });
         });
     });
 }
