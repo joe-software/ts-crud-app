@@ -3,7 +3,7 @@ interface CarDataInterface  {
     model: string,
     date: Date, 
     colour: string,
-    id?: string
+    mongoid?: string
 }
 
 // send POST request server with car data
@@ -88,7 +88,7 @@ if(updatePost[0] == null){
                 'model': model.value,
                 'date': date.value,
                 'colour': colour.value,
-                'id': item.dataset.mongoid
+                'mongoid': item.dataset.mongoid
             }
 
             fetch("update-post", {

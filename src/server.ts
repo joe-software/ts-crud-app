@@ -80,7 +80,12 @@ app.post('/car-data-post', async (req: any, res: any) => {
     });
 
     app.put('/update-post', async (req: any, res: any) => {
-       console.log(req.body)
+      console.log('update called')
+      await client.connect();
+      const myDB = client.db('ts-crud-app')
+      const dbCollection = myDB.collection('car-data-collection')      
+      await dbCollection.findOneAndReplace({_id: new ObjectId(req.body.mongoid)}, req.body)
+      await client.close(); 
   });
 
 

@@ -72,7 +72,7 @@ else {
                 'model': model.value,
                 'date': date.value,
                 'colour': colour.value,
-                'id': item.dataset.mongoid
+                'mongoid': item.dataset.mongoid
             };
             fetch("update-post", {
                 headers: {
