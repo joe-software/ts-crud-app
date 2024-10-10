@@ -55,12 +55,15 @@ function run() {
 run().catch(console.dir);
 // respond with index page
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // declare that dataArr will be an array, containing objects
     let dataArr = [];
     yield client.connect();
     const myDB = client.db('ts-crud-app');
     const dbCollection = myDB.collection('car-data-collection');
+    // take the data from the db response, and add each into dataArr, as an array element
     yield dbCollection.find().forEach((item) => dataArr.push(item));
     yield client.close();
+    // send response, a rendered HTML page containing the data contained within dataArr, within the value of carData
     res.render('index', {
         carData: dataArr
     });
@@ -69,22 +72,23 @@ app.post('/car-data-post', (req, res) => __awaiter(void 0, void 0, void 0, funct
     yield client.connect();
     const myDB = client.db('ts-crud-app');
     const dbCollection = myDB.collection('car-data-collection');
+    // insert the data which is contained in the body of the req - to a collection within db
     yield dbCollection.insertOne(req.body);
     yield client.close();
 }));
 app.delete('/delete-post', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('delete called');
     yield client.connect();
     const myDB = client.db('ts-crud-app');
     const dbCollection = myDB.collection('car-data-collection');
+    // delete the collection in db in which the variable __id matches mongoid contained within req.body     
     yield dbCollection.deleteOne({ _id: new mongodb_1.ObjectId(req.body.mongoid) });
     yield client.close();
 }));
 app.put('/update-post', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('update called');
     yield client.connect();
     const myDB = client.db('ts-crud-app');
     const dbCollection = myDB.collection('car-data-collection');
+    // find the collection which matches the __id property contained within req.body - and then replace db data object with that from req.body     
     yield dbCollection.findOneAndReplace({ _id: new mongodb_1.ObjectId(req.body.mongoid) }, req.body);
     yield client.close();
 }));
