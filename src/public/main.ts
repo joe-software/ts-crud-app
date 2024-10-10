@@ -40,7 +40,8 @@ if(submitCarData == null){
           },
         method: 'POST',
         body: JSON.stringify(dataSubmissionObject)
-    })
+    }).then(() => {
+        window.location.reload()})  
     })
 }
 
@@ -72,7 +73,8 @@ if(deletePost[0] == null){
                   },
                 method: 'DELETE',
                 body: JSON.stringify(deletePostData)
-            })    
+            }).then(() => {
+                window.location.reload()})  
         })    
     }
     )}
@@ -113,7 +115,8 @@ if(updatePost[0] == null){
                   },
                 method: 'PUT',
                 body: JSON.stringify(updatePostData)
-            })
+            }).then(() => {
+                window.location.reload()})
     
         })
     

@@ -70,7 +70,9 @@ app.post('/car-data-post', async (req: any, res: any) => {
         const dbCollection = myDB.collection('car-data-collection')
         // insert the data which is contained in the body of the req - to a collection within db
         await dbCollection.insertOne(req.body)
-        await client.close();       
+        await client.close().then(() => {
+          res.sendStatus(200) 
+        });     
     });
 
 
@@ -81,7 +83,9 @@ app.post('/car-data-post', async (req: any, res: any) => {
       const dbCollection = myDB.collection('car-data-collection') 
       // delete the collection in db in which the variable __id matches mongoid contained within req.body     
       await dbCollection.deleteOne({_id: new ObjectId(req.body.mongoid)})
-      await client.close(); 
+      await client.close().then(() => {
+        res.sendStatus(200) 
+      }); 
     });
 
     app.put('/update-post', async (req: any, res: any) => {
@@ -91,7 +95,9 @@ app.post('/car-data-post', async (req: any, res: any) => {
       const dbCollection = myDB.collection('car-data-collection')
       // find the collection which matches the __id property contained within req.body - and then replace db data object with that from req.body     
       await dbCollection.findOneAndReplace({_id: new ObjectId(req.body.mongoid)}, req.body)
-      await client.close(); 
+      await client.close().then(() => {
+        res.sendStatus(200) 
+      })
   });
 
 

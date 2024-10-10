@@ -33,6 +33,8 @@ else {
             },
             method: 'POST',
             body: JSON.stringify(dataSubmissionObject)
+        }).then(() => {
+            window.location.reload();
         });
     });
 }
@@ -60,6 +62,8 @@ else {
                 },
                 method: 'DELETE',
                 body: JSON.stringify(deletePostData)
+            }).then(() => {
+                window.location.reload();
             });
         });
     });
@@ -95,6 +99,8 @@ else {
                 },
                 method: 'PUT',
                 body: JSON.stringify(updatePostData)
+            }).then(() => {
+                window.location.reload();
             });
         });
     });

@@ -74,7 +74,9 @@ app.post('/car-data-post', (req, res) => __awaiter(void 0, void 0, void 0, funct
     const dbCollection = myDB.collection('car-data-collection');
     // insert the data which is contained in the body of the req - to a collection within db
     yield dbCollection.insertOne(req.body);
-    yield client.close();
+    yield client.close().then(() => {
+        res.sendStatus(200);
+    });
 }));
 app.delete('/delete-post', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield client.connect();
@@ -82,7 +84,9 @@ app.delete('/delete-post', (req, res) => __awaiter(void 0, void 0, void 0, funct
     const dbCollection = myDB.collection('car-data-collection');
     // delete the collection in db in which the variable __id matches mongoid contained within req.body     
     yield dbCollection.deleteOne({ _id: new mongodb_1.ObjectId(req.body.mongoid) });
-    yield client.close();
+    yield client.close().then(() => {
+        res.sendStatus(200);
+    });
 }));
 app.put('/update-post', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield client.connect();
@@ -90,7 +94,9 @@ app.put('/update-post', (req, res) => __awaiter(void 0, void 0, void 0, function
     const dbCollection = myDB.collection('car-data-collection');
     // find the collection which matches the __id property contained within req.body - and then replace db data object with that from req.body     
     yield dbCollection.findOneAndReplace({ _id: new mongodb_1.ObjectId(req.body.mongoid) }, req.body);
-    yield client.close();
+    yield client.close().then(() => {
+        res.sendStatus(200);
+    });
 }));
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
