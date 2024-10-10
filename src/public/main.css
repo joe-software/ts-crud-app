@@ -1,3 +1,8 @@
+body{
+    font-family: "Roboto", sans-serif;
+}
+
+
 #colour-patch{
     height: 100px;
     width: 100px;
@@ -9,6 +14,7 @@
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .car-data-card-cont{
@@ -17,4 +23,17 @@
     margin: 10px 5px;
     padding: 10px 5px;
     width: 30%;
+}
+
+.update-cont{
+    display: flex;
+    flex-wrap: nowrap; 
+    flex-direction: column;  
+    border: 2px solid black;
+    padding: 10px 20px 10px 5px;
+    margin: 10px 5px;
+}
+
+.bold{
+    font-weight: bold;
 }
